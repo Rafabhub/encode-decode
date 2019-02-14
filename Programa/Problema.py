@@ -71,53 +71,53 @@ def convertOutputDecode(content, number):
 	return content[int(number)]	
 
 
+if __name__ == '__main__':
+	param = sys.argv[1:]
 
-param = sys.argv[1:]
-
-if("encode" in param[0]):
-	#####Open file#####
-	file = open(param[0], 'r') 
-	content_file = file.read()
-	file.close()
-	###################
-
-
-	########Removing trashes#########
-	content_file = content_file.replace('\n','') #Remove the \n trash
-	#################################
-
-	elements = sorted(toEncode(content_file))
-	
-	outputName = param[0].split('.')
-	outputName = outputName[0] + '.out'
-
-	file = open(outputName,'w')
-	output = convertOutputEncode(elements, content_file)
-	file.write(output)
-	file.close()
+	if("encode" in param[0]):
+		#####Open file#####
+		file = open(param[0], 'r') 
+		content_file = file.read()
+		file.close()
+		###################
 
 
-elif("decode" in param[0]):
-	file = open(param[0], 'r')
-	content_file = file.read()
-	file.close()
-	########Removing trashes#########
-	content_file = content_file.replace('\'','')
-	content_file = content_file.replace('[','')
-	content_file = content_file.replace(']','')
-	content_file = content_file.split(',')
-	###############################
-	numberLine = content_file[1].replace(' ','')
-	word_List = convertStringToList(content_file[0])
+		########Removing trashes#########
+		content_file = content_file.replace('\n','') #Remove the \n trash
+		#################################
 
-	matrixDecode = toDecode(word_List)
+		elements = sorted(toEncode(content_file))
+		
+		outputName = param[0].split('.')
+		outputName = outputName[0] + '.out'
 
-	outputName = param[0].split('.')
-	outputName = outputName[0] + '.out'
+		file = open(outputName,'w')
+		output = convertOutputEncode(elements, content_file)
+		file.write(output)
+		file.close()
 
-	file = open(outputName,'w')
-	output = convertOutputDecode(matrixDecode, numberLine)
-	file.write(output)
-	file.close()
+
+	elif("decode" in param[0]):
+		file = open(param[0], 'r')
+		content_file = file.read()
+		file.close()
+		########Removing trashes#########
+		content_file = content_file.replace('\'','')
+		content_file = content_file.replace('[','')
+		content_file = content_file.replace(']','')
+		content_file = content_file.split(',')
+		###############################
+		numberLine = content_file[1].replace(' ','')
+		word_List = convertStringToList(content_file[0])
+
+		matrixDecode = toDecode(word_List)
+
+		outputName = param[0].split('.')
+		outputName = outputName[0] + '.out'
+
+		file = open(outputName,'w')
+		output = convertOutputDecode(matrixDecode, numberLine)
+		file.write(output)
+		file.close()
 
 
